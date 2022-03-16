@@ -10,6 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_03_15_155530) do
+
+  create_table "trips", force: :cascade do |t|
+    t.string "start_address"
+    t.string "destination_address"
+    t.decimal "distance", precision: 10, scale: 2
+    t.decimal "price", precision: 10, scale: 2
+    t.datetime "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

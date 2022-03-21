@@ -10,9 +10,22 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
     end
   end
 
+  context 'when there is a trips but not in current week' do
+    before do
+      Trip.create!(trip_attributes(date: '02-03-2022', distance: 15.42, price: 14.63))
+    end
+
+    it 'returns total_distance and total_price as 0' do
+      fetch
+
+      expect(parsed_body).to eq 'total_distance' => 0,
+                                'total_price' => 0
+    end
+  end
+
   context 'when there is one trip in current week' do
     before do
-      Trip.create!(trip_attributes(distance: 15.42, price: 14.63))
+      Trip.create!(trip_attributes(date: '21-03-2022', distance: 15.42, price: 14.63))
     end
 
     it 'returns right values for total_distance and total_price' do
@@ -23,10 +36,24 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
     end
   end
 
+  context 'when there are two trips but only one in current week' do
+    before do
+      Trip.create!(trip_attributes(date: '21-03-2022', distance: 15.42, price: 14.63))
+      Trip.create!(trip_attributes(date: '02-03-2022', distance: 14.58, price: 15.37))
+    end
+
+    it 'returns right values (for one trip) for total_distance and total_price' do
+      fetch
+
+      expect(parsed_body).to eq 'total_distance' => '15.42',
+                                'total_price' => '14.63'
+    end
+  end
+
   context 'when there are two trips in current week' do
     before do
-      Trip.create!(trip_attributes(distance: 15.42, price: 14.63))
-      Trip.create!(trip_attributes(distance: 14.58, price: 15.37))
+      Trip.create!(trip_attributes(date: '21-03-2022', distance: 15.42, price: 14.63))
+      Trip.create!(trip_attributes(date: '21-03-2022', distance: 14.58, price: 15.37))
     end
 
     it 'returns right values for total_distance and total_price' do
@@ -37,3 +64,5 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
     end
   end
 end
+
+#  I dont know how to make spec with interactive date

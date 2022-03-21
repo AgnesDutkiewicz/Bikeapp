@@ -3,6 +3,10 @@ module Api
     def create
       @trip = Trip.new(trip_params)
 
+      start_address_coordinates = Geocoder.coordinates(@trip.start_address)
+      destination_coordinates = Geocoder.coordinates(@trip.destination_address)
+      @trip.distance = Geocoder::Calculations.distance_between(start_address_coordinates, destination_coordinates)
+
       if @trip.save
         render json: @trip, status: :created
       else
@@ -13,8 +17,7 @@ module Api
     private
 
     def trip_params
-      # remember to change this so distance is calculated by geokit
-      params.require(:trip).permit(:start_address, :destination_address, :price, :distance, :date)
+      params.require(:trip).permit(:start_address, :destination_address, :price, :date)
     end
   end
 end

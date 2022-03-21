@@ -4,7 +4,7 @@ module Api
       @trip = Trip.new(trip_params)
 
       if @trip.save
-        render json: @trip, status: :created, location: @trip
+        render json: @trip, status: :created
       else
         render json: @trip.errors, status: :unprocessable_entity
       end
@@ -13,7 +13,7 @@ module Api
     private
 
     def trip_params
-      #remember to change this so distance is calculated by geokit
+      # remember to change this so distance is calculated by geokit
       params.require(:trip).permit(:start_address, :destination_address, :price, :distance, :date)
     end
   end

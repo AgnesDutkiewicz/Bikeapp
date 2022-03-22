@@ -29,10 +29,10 @@ RSpec.describe Api::Stats::MonthlyController, type: :request do
     it 'returns right values' do
       fetch
 
-      expect(parsed_body).to eq [{ 'day' => '2022-03-15',
-                                   'total_distance' => '15.42',
-                                   'avg_ride' => '15.42',
-                                   'avg_price' => '14.63' }]
+      expect(parsed_body).to eq [{ 'day' => 'March, 15th',
+                                   'total_distance' => '15.42 km',
+                                   'avg_ride' => '15.42 km',
+                                   'avg_price' => '14.63 PLN' }]
     end
   end
 
@@ -45,10 +45,10 @@ RSpec.describe Api::Stats::MonthlyController, type: :request do
     it 'returns right values' do
       fetch
 
-      expect(parsed_body).to eq [{ 'day' => '2022-03-15',
-                                   'total_distance' => '15.42',
-                                   'avg_ride' => '15.42',
-                                   'avg_price' => '14.63' }]
+      expect(parsed_body).to eq [{ 'day' => 'March, 15th',
+                                   'total_distance' => '15.42 km',
+                                   'avg_ride' => '15.42 km',
+                                   'avg_price' => '14.63 PLN' }]
     end
   end
 
@@ -61,10 +61,10 @@ RSpec.describe Api::Stats::MonthlyController, type: :request do
     it 'returns right values' do
       fetch
 
-      expect(parsed_body).to eq [{ 'day' => '2022-03-15',
-                                   'total_distance' => '30.0',
-                                   'avg_ride' => '15.0',
-                                   'avg_price' => '15.0' }]
+      expect(parsed_body).to eq [{ 'day' => 'March, 15th',
+                                   'total_distance' => '30.0 km',
+                                   'avg_ride' => '15.0 km',
+                                   'avg_price' => '15.0 PLN' }]
     end
   end
 
@@ -77,16 +77,14 @@ RSpec.describe Api::Stats::MonthlyController, type: :request do
     it 'returns right values' do
       fetch
 
-      expect(parsed_body).to eq [{ 'day' => '2022-03-15',
-                                   'total_distance' => '15.42',
-                                   'avg_ride' => '15.42',
-                                   'avg_price' => '14.63' },
-                                 { 'day' => '2022-03-17',
-                                   'total_distance' => '14.58',
-                                   'avg_ride' => '14.58',
-                                   'avg_price' => '15.37' }]
+      expect(parsed_body).to eq [{ 'day' => 'March, 15th',
+                                   'total_distance' => '15.42 km',
+                                   'avg_ride' => '15.42 km',
+                                   'avg_price' => '14.63 PLN' },
+                                 { 'day' => 'March, 17th',
+                                   'total_distance' => '14.58 km',
+                                   'avg_ride' => '14.58 km',
+                                   'avg_price' => '15.37 PLN' }]
     end
   end
 end
-
-#  I dont know how to make spec with interactive date

@@ -12,6 +12,9 @@ module Api
           price = price.to_d + t.price.to_d
         end
 
+        w_distance = "#{w_distance} km"
+        price = "#{price} PLN"
+
         weekly_stats = { total_distance: w_distance, total_price: price }
 
         render json: weekly_stats

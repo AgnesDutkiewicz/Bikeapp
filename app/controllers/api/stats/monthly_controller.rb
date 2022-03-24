@@ -11,9 +11,10 @@ module Api
         grouped_trips.values.map do |trips|
           total_distance = 0
           total_price = 0
+          date = nil
 
           trips.map do |trip|
-            @date = trip.date.strftime("%B, #{trip.date.day.ordinalize}")
+            date = trip.date.strftime("%B, #{trip.date.day.ordinalize}")
             total_price = total_price.to_d + trip.price.to_d
             total_distance = total_distance.to_d + trip.distance.to_d
           end
@@ -25,7 +26,7 @@ module Api
           avg_ride = "#{avg_ride} km"
           avg_price = "#{avg_price} PLN"
 
-          monthly_stats << { day: @date, total_distance: total_distance, avg_ride: avg_ride, avg_price: avg_price }
+          monthly_stats << { day: date, total_distance: total_distance, avg_ride: avg_ride, avg_price: avg_price }
         end
 
         render json: monthly_stats

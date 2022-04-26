@@ -2,7 +2,7 @@ class Trip < ApplicationRecord
   validates :start_address, presence: true
   validates :destination_address, presence: true
   validates :distance, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :date, presence: true
 
   geocoded_by :start_address

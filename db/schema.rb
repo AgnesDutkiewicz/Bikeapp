@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_21_192502) do
-
-  create_table "trips", force: :cascade do |t|
-    t.string "start_address"
-    t.string "destination_address"
-    t.decimal "distance", precision: 10, scale: 2
-    t.decimal "price", precision: 10, scale: 2
-    t.datetime "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.decimal "latitude"
-    t.decimal "longitude"
+ActiveRecord::Schema.define(version: 20_220_401_134_610) do
+  create_table 'trips', force: :cascade do |t|
+    t.string 'start_address'
+    t.string 'destination_address'
+    t.decimal 'distance', precision: 10, scale: 2
+    t.decimal 'price', precision: 10, scale: 2
+    t.date 'date'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.decimal 'latitude'
+    t.decimal 'longitude'
   end
-
 end

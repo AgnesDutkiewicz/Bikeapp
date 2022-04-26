@@ -12,7 +12,9 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
 
   context 'when there is a trips but not in current week' do
     before do
-      Trip.create!(trip_attributes(date: '02-03-2022', distance: 15.42, price: 14.63))
+      create(:trip, date: '02-03-2022', distance: 15.42, price: 14.63)
+
+      # Trip.create!(trip_attributes(date: '02-03-2022', distance: 15.42, price: 14.63))
     end
 
     it 'returns total_distance and total_price as 0' do
@@ -25,7 +27,7 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
 
   context 'when there is one trip in current week' do
     before do
-      Trip.create!(trip_attributes(date: '23-03-2022', distance: 15.42, price: 14.63))
+      Trip.create!(trip_attributes(date: 5.days.ago, distance: 15.42, price: 14.63))
     end
 
     it 'returns right values for total_distance and total_price' do
@@ -38,8 +40,8 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
 
   context 'when there are two trips but only one in current week' do
     before do
-      Trip.create!(trip_attributes(date: '23-03-2022', distance: 15.42, price: 14.63))
-      Trip.create!(trip_attributes(date: '02-03-2022', distance: 14.58, price: 15.37))
+      Trip.create!(trip_attributes(date: 6.days.ago, distance: 15.42, price: 14.63))
+      Trip.create!(trip_attributes(date: 17.days.ago, distance: 14.58, price: 15.37))
     end
 
     it 'returns right values (for one trip) for total_distance and total_price' do
@@ -52,8 +54,8 @@ RSpec.describe Api::Stats::WeeklyController, type: :request do
 
   context 'when there are two trips in current week' do
     before do
-      Trip.create!(trip_attributes(date: '23-03-2022', distance: 15.42, price: 14.63))
-      Trip.create!(trip_attributes(date: '23-03-2022', distance: 14.58, price: 15.37))
+      Trip.create!(trip_attributes(date: 6.days.ago, distance: 15.42, price: 14.63))
+      Trip.create!(trip_attributes(date: 6.days.ago, distance: 14.58, price: 15.37))
     end
 
     it 'returns right values for total_distance and total_price' do
